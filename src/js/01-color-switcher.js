@@ -9,20 +9,22 @@ refs.stopBtn.addEventListener('click', onStopBtn);
 
 let timerId = null;
 
-function onStartBtn(event) {
+function onStartBtn() {
   timerId = setInterval(() => {
     const randomColor = getRandomHexColor();
     refs.bodyEl.style.backgroundColor = randomColor;
   }, 1000);
-
-  event.target.disabled = true;
-  refs.stopBtn.disabled = false;
+  changeDisabled(true);
 }
 
-function onStopBtn(event) {
+function onStopBtn() {
   clearInterval(timerId);
-  refs.startBtn.disabled = false;
-  event.target.disabled = true;
+  changeDisabled(false);
+}
+
+function changeDisabled(value) {
+  refs.startBtn.disabled = value;
+  refs.stopBtn.disabled = !value;
 }
 
 function getRandomHexColor() {
